@@ -6,6 +6,14 @@ import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 
+/**
+ * TestContext — утилитный класс для хранения Playwright объектов в рамках каждого потока.
+ * Использует ThreadLocal, чтобы обеспечить полную изоляцию браузерного окружения
+ * при параллельном запуске тестов (Playwright, Browser, Context, Page, AllureUtils).
+ *
+ * Также хранит baseUrl для каждого потока и предоставляет метод cleanup()
+ * для корректного закрытия всех ресурсов.
+ */
 public class TestContext {
     private static final ThreadLocal<Playwright> playwrightThreadLocal = new ThreadLocal<>();
     private static final ThreadLocal<Browser> browserThreadLocal = new ThreadLocal<>();
